@@ -114,8 +114,8 @@ Ogni cartella ha uno scopo specifico:
 - Visual Studio Code
 
 ## Link progetto:
-- Netlify: 
-- Repo GitHub: 
+- Netlify: https://smartfarmweb3.netlify.app
+- Repo GitHub: https://github.com/StefanoRimoldi/Progetto-Typescript-React-web3-di-Stefano-Rimoldi.git
 - Vercel: 
 
 
