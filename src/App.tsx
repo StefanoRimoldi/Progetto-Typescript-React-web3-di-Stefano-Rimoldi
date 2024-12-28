@@ -1,4 +1,3 @@
-
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Importa il Router e Routes
 import Navbar from './components/Navbar'; // Importa la Navbar
 import { CartProvider } from './context/CartContext'; // Importa il CartProvider

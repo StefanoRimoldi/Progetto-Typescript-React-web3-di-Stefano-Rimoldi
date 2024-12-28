@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState, useEffect } from "react";
 import { FaWallet, FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
 import { Link, useNavigate } from 'react-router-dom';

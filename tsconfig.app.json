@@ -6,7 +6,7 @@
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
     "skipLibCheck": true,
-    "noEmitOnError": false,  // Aggiungi questa riga
+    "noEmitOnError": false,
     "moduleResolution": "node",
     "noEmit": true,
     "jsx": "react-jsx",

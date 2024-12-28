@@ -1,6 +1,6 @@
 // src/data/products.ts
 export interface Product {
-    id: string;
+    id: number;
     name: string;
     price: number;
     description: string;
@@ -10,7 +10,7 @@ export interface Product {
 
 export const products: Product[] = [
     {
-        id: "0",
+        id: 0,
         name: "Organic Carrots",
         price: 0.0001,  // Prezzo abbassato
         description: "Fresh, crispy organic carrots rich in beta-carotene and essential nutrients. Locally sourced from sustainable farms.",
@@ -18,7 +18,7 @@ export const products: Product[] = [
         pricePerKg: 0.0015,  // Prezzo per kg
     },
     {
-        id: "1",
+        id: 1,
         name: "Organic Tomatoes",
         price: 0.0002,  // Prezzo abbassato
         description: "Juicy, ripe organic tomatoes perfect for salads and cooking. Grown without pesticides.",
@@ -26,7 +26,7 @@ export const products: Product[] = [
         pricePerKg: 0.002,  // Prezzo per kg
     },
     {
-        id: "2",
+        id: 2,
         name: "Fresh Lettuce",
         price: 0.00015,  // Prezzo abbassato
         description: "Crisp and fresh organic lettuce, perfect for healthy salads and sandwiches.",
@@ -34,7 +34,7 @@ export const products: Product[] = [
         pricePerKg: 0.0017,  // Prezzo per kg
     },
     {
-        id: "3",
+        id: 3,
         name: "Mixed Salad",
         price: 0.0002,  // Prezzo abbassato
         description: "A variety of organic leafy greens, ready to create the perfect healthy salad.",
@@ -42,7 +42,7 @@ export const products: Product[] = [
         pricePerKg: 0.002,  // Prezzo per kg
     },
     {
-        id: "4",
+        id: 4,
         name: "Fresh Spinach",
         price: 0.00025,  // Prezzo abbassato
         description: "Nutrient-rich organic spinach leaves, perfect for smoothies and cooking.",
@@ -50,7 +50,7 @@ export const products: Product[] = [
         pricePerKg: 0.0019,  // Prezzo per kg
     },
     {
-        id: "5",
+        id: 5,
         name: "Bell Peppers",
         price: 0.0003,  // Prezzo abbassato
         description: "Colorful organic bell peppers packed with vitamins and fresh flavor.",
@@ -58,7 +58,7 @@ export const products: Product[] = [
         pricePerKg: 0.003,  // Prezzo per kg
     },
     {
-        id: "6",
+        id: 6,
         name: "Fresh Broccoli",
         price: 0.0003,  // Prezzo abbassato
         description: "Crisp organic broccoli florets, rich in nutrients and antioxidants.",
@@ -66,7 +66,7 @@ export const products: Product[] = [
         pricePerKg: 0.0025,  // Prezzo per kg
     },
     {
-        id: "7",
+        id: 7,
         name: "Baby Kale",
         price: 0.00035,  // Prezzo abbassato
         description: "Tender organic baby kale leaves, perfect for salads and cooking.",
@@ -74,7 +74,7 @@ export const products: Product[] = [
         pricePerKg: 0.003,  // Prezzo per kg
     },
     {
-        id: "8",
+        id: 8,
         name: "Fresh Cucumber",
         price: 0.0002,  // Prezzo abbassato
         description: "Crisp and refreshing organic cucumbers, perfect for salads and snacking.",

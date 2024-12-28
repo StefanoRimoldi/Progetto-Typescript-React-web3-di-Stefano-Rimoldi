@@ -1,10 +1,7 @@
-
 import { FiXCircle, FiHome } from "react-icons/fi";
-import { useLocation } from 'react-router-dom';
+
 
 const CancelledPage = () => {
-    const location = useLocation();
-    const amountPaid = location.state?.amount;
     const transactionDetails = { timestamp: new Date().toLocaleString() }
 
     return (

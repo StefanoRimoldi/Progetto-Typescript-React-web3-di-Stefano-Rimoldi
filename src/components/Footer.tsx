@@ -1,5 +1,4 @@
-import React from "react";
-import { Link } from 'react-router-dom';
+
 import { FaReact, FaEthereum } from 'react-icons/fa';
 import { SiTypescript, SiTailwindcss, SiVisualstudiocode } from 'react-icons/si';
 

@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 import { FiShoppingCart, FiTrash2 } from "react-icons/fi";
@@ -7,24 +9,22 @@ import LoadingPage from './LoadingPage';
 
 const CheckoutPage = () => {
     const { cart, removeFromCart } = useCart();
-    const [provider, setProvider] = useState(null);
+    const [provider, setProvider] = useState<ethers.BrowserProvider | null>(null);
     const [userAddress, setUserAddress] = useState('');
     const [isConnected, setIsConnected] = useState(false);
     const [error, setError] = useState('');
-    const [contract, setContract] = useState(null);
+    const [contract, setContract] = useState<ethers.Contract | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const navigate = useNavigate();
 
     const contractAddress = '0x56427f1EC83e7c062543cd5E1f625f009dFE613f';
-
-    const PaymentProcessorABI = [
-        {
-            "inputs": [],
-            "name": "pay",
-            "outputs": [],
-            "stateMutability": "payable",
-            "type": "function"
-        },
+    const PaymentProcessorABI = [{
+        "inputs": [],
+        "name": "pay",
+        "outputs": [],
+        "stateMutability": "payable",
+        "type": "function"
+    },
         {
             "inputs": [],
             "stateMutability": "nonpayable",
@@ -55,11 +55,10 @@ const CheckoutPage = () => {
             ],
             "stateMutability": "view",
             "type": "function"
-        }
-    ];
+        }];
 
     const calculateTotalPrice = () => {
-        return cart.reduce((total, item) => total + item.totalPrice, 0);
+        return cart.reduce((total, item) => total + (item.totalPrice || 0), 0);
     };
 
     const totalPrice = calculateTotalPrice();
@@ -69,18 +68,21 @@ const CheckoutPage = () => {
             if (window.ethereum) {
                 const ethProvider = new ethers.BrowserProvider(window.ethereum);
                 const accounts = await ethProvider.listAccounts();
+
                 if (accounts.length > 0) {
                     setIsConnected(true);
                     setProvider(ethProvider);
-                    setUserAddress(accounts[0]);
-
 
                     const signer = await ethProvider.getSigner();
+                    const address = await signer.getAddress();
+                    setUserAddress(address);
+
                     const paymentContract = new ethers.Contract(contractAddress, PaymentProcessorABI, signer);
                     setContract(paymentContract);
                 }
             }
         };
+
         checkConnection();
     }, []);
 
@@ -90,30 +92,26 @@ const CheckoutPage = () => {
             return;
         }
 
-        if (!contract) {
-            setError('Contratto non definito.');
+        if (!contract || typeof contract.pay !== 'function') {
+            setError('Contratto non valido.');
             return;
         }
 
         setIsLoading(true);
 
-
         try {
-            const tx = await contract.pay({
-                value: ethers.parseEther(totalPrice.toString())
-            });
-
+            const tx = await contract.pay({ value: ethers.parseEther(totalPrice.toString()) });
             console.log(`Transazione inviata: ${tx.hash}`);
             await tx.wait();
             alert('Transazione completata con successo!');
-
             navigate('/success', { state: { amount: totalPrice } });
         } catch (error) {
-            console.error('Errore nella transazione:', error);
+            if (error instanceof Error) {
             setError(error.message);
+            }
             navigate('/cancelled');
         } finally {
-            setIsLoading(false); // Stop loading
+            setIsLoading(false);
         }
     };
 

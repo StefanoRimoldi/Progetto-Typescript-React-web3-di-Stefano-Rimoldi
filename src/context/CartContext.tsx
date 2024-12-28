@@ -1,15 +1,31 @@
-// context/CartContext.tsx
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { Product } from '../data/product';
 import { ethers } from 'ethers';
 
-const CartContext = createContext<any>(null);
+// Definizione dei tipi per il contesto
+interface CartContextType {
+    cart: Product[];
+    addToCart: (product: Product) => void;
+    removeFromCart: (productId: number) => void;
+    totalItems: number;
+    totalPrice: number;
+    account: string | null;
+    balance: string | null;
+    connectWallet: () => Promise<void>;
+    disconnectWallet: () => void;
+}
 
-export const CartProvider: React.FC = ({ children }) => {
-    // Stato del carrello
+interface CartProviderProps {
+    children: ReactNode;
+}
+
+// Creazione del contesto
+const CartContext = createContext<CartContextType | null>(null);
+
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
     const [cart, setCart] = useState<Product[]>([]);
     const [account, setAccount] = useState<string | null>(null);
-    const [balance, setBalance] = useState<number | null>(null);
+    const [balance, setBalance] = useState<string | null>(null);
 
     // Aggiungi un prodotto al carrello
     const addToCart = (product: Product) => {
@@ -37,12 +53,6 @@ export const CartProvider: React.FC = ({ children }) => {
                 const accounts = await provider.send("eth_requestAccounts", []);
                 setAccount(accounts[0]); // Imposta l'account connesso
                 fetchBalance(accounts[0]); // Recupera il saldo dell'account
-
-                // Monitora il cambiamento di account
-                window.ethereum.on("accountsChanged", (accounts: string[]) => {
-                    setAccount(accounts[0]);
-                    fetchBalance(accounts[0]);
-                });
             } catch (err) {
                 console.error("Errore nella connessione a MetaMask:", err);
             }
@@ -97,7 +107,7 @@ export const CartProvider: React.FC = ({ children }) => {
                 account,
                 balance,
                 connectWallet,
-                disconnectWallet
+                disconnectWallet,
             }}
         >
             {children}
@@ -106,5 +116,9 @@ export const CartProvider: React.FC = ({ children }) => {
 };
 
 export const useCart = () => {
-    return useContext(CartContext);
+    const context = useContext(CartContext);
+    if (!context) {
+        throw new Error("useCart deve essere usato all'interno di un CartProvider");
+    }
+    return context;
 };
