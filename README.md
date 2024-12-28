@@ -3,7 +3,7 @@
 
 ## Introduzione
 
-SmartFarm 3.0 è un marketplace innovativo progettato per la vendita di prodotti biologici a km zero. Utilizzando la tecnologia blockchain, SmartFarm 3.0 offre un sistema sicuro e trasparente per acquistare e vendere prodotti agricoli direttamente tra produttori e consumatori. Gli utenti possono esplorare una vasta gamma di prodotti biologici e gestire transazioni in modo sicuro tramite smart contract. Il marketplace promuove l'agricoltura sostenibile e facilita l'accesso diretto a prodotti freschi e locali, garantendo un sistema innovativo e sicuro grazie alla tecnologia blockchain.
+**SmartFarm** 3.0 è un marketplace innovativo progettato per la vendita di prodotti biologici a km zero. Utilizzando la tecnologia blockchain, SmartFarm 3.0 offre un sistema sicuro e trasparente per acquistare e vendere prodotti agricoli direttamente tra produttori e consumatori. Gli utenti possono esplorare una vasta gamma di prodotti biologici e gestire transazioni in modo sicuro tramite smart contract. Il marketplace promuove l'agricoltura sostenibile e facilita l'accesso diretto a prodotti freschi e locali, garantendo un sistema innovativo e sicuro grazie alla tecnologia blockchain.
 ---
 
 ## Sommario
