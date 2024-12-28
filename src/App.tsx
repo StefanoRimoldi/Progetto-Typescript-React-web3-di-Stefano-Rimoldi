@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'; // Importa il Router e Routes
-import Navbar from './components/Navbar'; // Importa la Navbar
-import { CartProvider } from './context/CartContext'; // Importa il CartProvider
-import ProductList from './components/ProductList'; // Importa la lista dei prodotti
-import CheckoutPage from './components/pages/CheckoutPage'; // La pagina del checkout
-import SuccessPage from './components/pages/SuccessPage'; // Importa la pagina di successo
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Navbar from './components/Navbar';
+import { CartProvider } from './context/CartContext';
+import ProductList from './components/ProductList';
+import CheckoutPage from './components/pages/CheckoutPage';
+import SuccessPage from './components/pages/SuccessPage';
 import CancelledPage from './components/pages/CancelledPage';
 import DisconnectedPage from './components/pages/DisconnectedPage';
 import Footer from './components/Footer';
@@ -12,13 +12,13 @@ import LoadingPage from './components/pages/LoadingPage';
 
 const App = () => {
   return (
-    <CartProvider> {/* Avvolgi tutto con il CartProvider */}
-      <Router> {/* Aggiungi il Router per gestire le rotte */}
+    <CartProvider>
+      <Router> 
         <div className="min-h-screen bg-gray-900 flex flex-col bg-black">
           <main className="flex-1 container mx-auto p-4">
-            <Navbar /> {/* Navbar visibile su tutte le pagine */}
-            <Routes> {/* Aggiungi Routes per le diverse pagine */}
-              {/* Home page con la lista dei prodotti */}
+            <Navbar />
+            <Routes>
+
               <Route path="/" element={
                 <>
                   <div className="flex items-center justify-center space-x-2 md:hidden">
@@ -32,14 +32,14 @@ const App = () => {
                     <h1 className="text-xl font-bold text-white"></h1>
                   </div>
 
-                  <ProductList /> {/* Visualizza la lista dei prodotti */}
+                  <ProductList /> 
                 </>
               } />
 
-              {/* Pagina del checkout */}
+
               <Route path="/checkout" element={<CheckoutPage />} />
 
-              {/* Pagina di successo */}
+
               <Route path="/success" element={<SuccessPage />} />
               <Route path="/cancelled" element={<CancelledPage />} />
               <Route path="/disconnected" element={<DisconnectedPage />} />

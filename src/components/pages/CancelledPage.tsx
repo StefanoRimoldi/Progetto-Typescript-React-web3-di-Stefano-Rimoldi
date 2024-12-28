@@ -1,6 +1,5 @@
 import { FiXCircle, FiHome } from "react-icons/fi";
 
-
 const CancelledPage = () => {
     const transactionDetails = { timestamp: new Date().toLocaleString() }
 

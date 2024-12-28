@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 import { FiShoppingCart, FiTrash2 } from "react-icons/fi";
@@ -104,6 +103,7 @@ const CheckoutPage = () => {
             console.log(`Transazione inviata: ${tx.hash}`);
             await tx.wait();
             alert('Transazione completata con successo!');
+            cart.forEach(item => removeFromCart(item.id)); // Rimuovi ogni articolo dal carrello
             navigate('/success', { state: { amount: totalPrice } });
         } catch (error) {
             if (error instanceof Error) {
@@ -118,6 +118,7 @@ const CheckoutPage = () => {
     if (isLoading) {
         return <LoadingPage />;
     }
+
 
 
     return (
