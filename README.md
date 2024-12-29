@@ -1,4 +1,4 @@
-# Progetto React e Typescript - FoodWise Quiz
+# Progetto Typescript, React e Web3 - SmartFarm3.0
 <a name="readme-top"></a>
 
 ## Introduzione
