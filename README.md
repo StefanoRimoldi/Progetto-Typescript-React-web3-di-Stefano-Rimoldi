@@ -116,7 +116,7 @@ Ogni cartella ha uno scopo specifico:
 ## Link progetto:
 - Netlify: https://smartfarmweb3.netlify.app
 - Repo GitHub: https://github.com/StefanoRimoldi/Progetto-Typescript-React-web3-di-Stefano-Rimoldi.git
-- Vercel: 
+- Vercel: https://smartfarmweb3.vercel.app/
 
 
 ## Contatti
