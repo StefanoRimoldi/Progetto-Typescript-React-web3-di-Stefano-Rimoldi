@@ -1,6 +1,7 @@
 
 import { FiHome } from "react-icons/fi";
 import { FaWallet } from "react-icons/fa";
+import { Link } from 'react-router-dom';
 
 const DisconnectedPage = () => {
     const walletDetails = {
@@ -21,13 +22,14 @@ const DisconnectedPage = () => {
                     <span>Last Connected: </span>
                     <span className="text-white">{walletDetails.lastConnected}</span>
                 </div>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center mt-4">
-                    <button
-                        onClick={() => window.location.href = "/"}
+                <div className="flex flex-col items-center justify-center sm:flex-row gap-4 mt-4">
+                    <Link to="/">
+                        <button
                         className="bg-gray-700 text-white py-3 px-6 rounded-lg hover:bg-gray-600 transition-colors duration-300 flex items-center justify-center">
                         Return to Home
                         <FiHome className="ml-2" />
                     </button>
+                    </Link>
                 </div>
             </div >
         </div>

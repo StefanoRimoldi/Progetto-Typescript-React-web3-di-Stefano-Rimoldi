@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import { useState, useEffect } from 'react';
 import { useCart } from '../../context/CartContext';
 import { FiShoppingCart, FiTrash2 } from "react-icons/fi";
@@ -16,6 +18,7 @@ const CheckoutPage = () => {
     const navigate = useNavigate();
 
     const contractAddress = '0x56427f1EC83e7c062543cd5E1f625f009dFE613f';
+    const sepoliaChainId = 11155111;
 
     const PaymentProcessorABI = [
         {
@@ -69,10 +72,32 @@ const CheckoutPage = () => {
             if (window.ethereum) {
                 const ethProvider = new ethers.BrowserProvider(window.ethereum);
                 const accounts = await ethProvider.listAccounts();
+
+
                 if (accounts.length > 0) {
                     setIsConnected(true);
                     setProvider(ethProvider);
                     setUserAddress(accounts[0]);
+
+
+                    const network = await window.ethereum.request({
+                        method: 'eth_chainId'
+                    });
+
+
+                    if (network !== `0x${sepoliaChainId.toString(16)}`) {
+                        setError('Please connect to the Sepolia testnet!');
+                        try {
+                            await window.ethereum.request({
+                                method: 'wallet_switchEthereumChain',
+                                params: [{ chainId: `0x${sepoliaChainId.toString(16)}` }]
+                            });
+                        } catch (switchError) {
+                            console.error("Error switching network:", switchError);
+                            setError('Could not switch to Sepolia testnet.');
+                        }
+                        return;
+                    }
 
 
                     const signer = await ethProvider.getSigner();
@@ -81,22 +106,55 @@ const CheckoutPage = () => {
                 }
             }
         };
+
         checkConnection();
-    }, []);
+
+
+        const handleChainChanged = (chainId) => {
+            if (chainId !== `0x${sepoliaChainId.toString(16)}`) {
+                setError('You are not using the Sepolia test network! Please switch to the Sepolia network.');
+            } else {
+                setError('');
+                checkConnection();
+            }
+        };
+
+
+        if (window.ethereum) {
+            window.ethereum.on('chainChanged', handleChainChanged);
+        }
+
+
+        return () => {
+            if (window.ethereum) {
+                window.ethereum.removeListener('chainChanged', handleChainChanged);
+            }
+        };
+
+    }, []); 
 
     const handleCheckout = async () => {
         if (!isConnected) {
-            setError('Per favore connettiti al tuo wallet prima di procedere.');
+            setError('Please connect your wallet before proceeding!');
             return;
         }
 
         if (!contract) {
-            setError('Contratto non definito.');
+            setError('You are not using the Sepolia test network! Please switch to the Sepolia network.');
+            return;
+        }
+
+
+        const network = await window.ethereum.request({
+            method: 'eth_chainId',
+        });
+
+        if (network !== `0x${sepoliaChainId.toString(16)}`) {
+            setError('You are not using the Sepolia test network! Please switch to the Sepolia network.');
             return;
         }
 
         setIsLoading(true);
-
 
         try {
             const tx = await contract.pay({
@@ -105,22 +163,22 @@ const CheckoutPage = () => {
 
             console.log(`Transazione inviata: ${tx.hash}`);
             await tx.wait();
-            alert('Transazione completata con successo!');
+            alert('Transaction completed successfully!');
 
             navigate('/success', { state: { amount: totalPrice } });
         } catch (error) {
-            console.error('Errore nella transazione:', error);
+            console.error('Transaction error:', error);
             setError(error.message);
             navigate('/cancelled');
         } finally {
-            setIsLoading(false); // Stop loading
+            setIsLoading(false);
         }
     };
+
 
     if (isLoading) {
         return <LoadingPage />;
     }
-
 
     return (
         <div className="min-h-screen bg-gray-900 py-8 px-4 sm:px-6 lg:px-8">

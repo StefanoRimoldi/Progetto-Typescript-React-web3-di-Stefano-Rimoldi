@@ -8,6 +8,10 @@ const SuccessPage = () => {
     const amountPaid = location.state?.amount;
     const transactionDetails = { timestamp: new Date().toLocaleString() }
 
+    const clearCart = () => {
+        localStorage.removeItem('cart');
+    };
+
     return (
         <div className="min-h-screen bg-gray-900 flex flex-col items-center justify-center text-white">
             <div className="max-w-3xl mx-auto text-center">
@@ -24,7 +28,10 @@ const SuccessPage = () => {
                 </div>
                 <div className="mt-8">
                     <button
-                        onClick={() => window.location.href = "/"}
+                        onClick={() => {
+                            clearCart();
+                            window.location.href = "/";
+                        }}
                         className="px-6 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 transition-colors duration-300"
                     >
                         Return to homepage

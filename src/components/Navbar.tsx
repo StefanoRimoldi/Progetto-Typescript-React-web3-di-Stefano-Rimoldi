@@ -113,7 +113,7 @@ const Navbar = () => {
                     {!account ? (
                         <button
                             onClick={connectWallet}
-                            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center"
+                            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 h-12 rounded-lg transition-colors duration-200 flex items-center"
                             aria-label="Connect MetaMask wallet"
                         >
                             <FaWallet className="text-xl lg:mr-2" />
@@ -121,20 +121,20 @@ const Navbar = () => {
                         </button>
                     ) : (
                         <div className="flex items-center space-x-4">
-                            <div className="bg-gray-700 px-4 py-2 rounded-lg">
+                                <div className="bg-gray-700 px-4 py-2 h-12 rounded-lg flex flex-col justify-center">
                                 <p className="text-gray-300 text-sm">Balance</p>
-                                <p className="text-white font-semibold">{balance} ETH</p>
+                                    <p className="text-white font-semibold text-sm">{balance} ETH</p>
                             </div>
-                            <div className="bg-gray-700 px-4 py-2 rounded-lg">
-                                <p className="text-gray-300 text-sm">Account</p>
-                                <p className="text-white font-semibold">
+                                <div className="bg-gray-700 px-4 py-2 h-12 rounded-lg flex flex-col justify-center">
+                                    <p className="text-gray-300 text-left text-sm">Account</p>
+                                    <p className="text-white text-sm font-semibold">
                                     {`${account.substring(0, 6)}...${account.substring(account.length - 4)}`}
                                 </p>
                             </div>
 
                             <button
                                 onClick={handleDisconnect}
-                                className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg transition-colors duration-200 flex items-center"
+                                    className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 h-12 rounded-lg transition-colors duration-200 flex items-center"
                                 aria-label="Disconnect MetaMask wallet"
                             >
                                 <FaSignOutAlt className="text-xl lg:mr-2" />
